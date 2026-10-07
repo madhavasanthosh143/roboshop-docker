@@ -1,18 +1,17 @@
 services:
+
   mongodb:
     image: mongodb:v1
     container_name: mongodb
+
   catalouge:
     image: catalouge:v1
     container_name: catalouge
     depends_on:
-    -mongodb
-  mongodb:
-    image: mongodb:v1
-    container_name: mongodb  
+      - mongodb
 
 networks:
   default:
     driver: bridge
     name: roboshop
-    external: false #if u have created network manually using docker network command
+    external: false
