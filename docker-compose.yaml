@@ -4,41 +4,48 @@ services:
     image: mongodb:v1
     container_name: mongodb
 
-  catalouge:
+  catalogue:
     image: catalouge:v1
-    container_name: catalouge
+    container_name: catalogue
     depends_on:
       - mongodb
+
   redis:
-    image: radis:7.0
-    container_name: radis
+    image: redis:7.0
+    container_name: redis
+
   mysql:
     image: mysql:v1
     container_name: mysql
+
   rabbitmq:
     image: rabbitmq:3
     container_name: rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: roboshop
-      RABBITMQ_DEFAULT_USER: roboshop123
+      RABBITMQ_DEFAULT_PASS: roboshop123
+
   user:
     image: user:v1
     container_name: user
     depends_on:
       - mongodb
       - redis
+
   cart:
     image: cart:v1
     container_name: cart
     depends_on:
-      - redis 
-      - catalouge
+      - redis
+      - catalogue
+
   shipping:
     image: shipping:v1
     container_name: shipping
-    deponds_on:
+    depends_on:
       - mysql
       - cart
+
   payment:
     image: payment:v1
     container_name: payment
@@ -46,19 +53,18 @@ services:
       - rabbitmq
       - cart
       - user
+
   frontend:
     image: frontend:v1
     container_name: frontend
-    ports: 
+    ports:
       - 80:80
     depends_on:
-      - catalouge
+      - catalogue
       - user
       - cart
       - shipping
       - payment
-                           
-
 
 networks:
   default:
