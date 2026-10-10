@@ -2,7 +2,7 @@ services:
 
   mongodb:
     build: ./mongodb  
-    image: santhoshdevops/mongodb:v1
+    image: joindevops/mongodb:v1
     container_name: mongodb
     volumes:
     - mongodb:/data/db
@@ -10,7 +10,7 @@ services:
     build:
       context: ./catalouge
       dockerfile: Dockerfile
-    image: santhoshdevops/catalouge:v1
+    image: joindevops/catalouge:v1
     container_name: catalogue
     depends_on:
       - mongodb
@@ -23,7 +23,7 @@ services:
 
   mysql:
     build: ./mysql
-    image: santhoshdevops/mysql:v1
+    image: joindevops/mysql:v1
     container_name: mysql
     volumes:
       - mysql:/var/lib/mysql
@@ -38,7 +38,7 @@ services:
 
   user:
     build: ./user
-    image: santhoshdevops/user:v1
+    image: joindevops/user:v1
     container_name: user
     depends_on:
       - mongodb
@@ -46,7 +46,7 @@ services:
 
   cart:
     build: ./cart
-    image: santhoshdevops/cart:v1
+    image: joindevops/cart:v1
     container_name: cart
     depends_on:
       - redis
@@ -54,7 +54,7 @@ services:
 
   shipping:
     build: ./shipping
-    image: santhoshdevops/shipping:v1
+    image: joindevops/shipping:v1
     container_name: shipping
     depends_on:
       - mysql
@@ -62,7 +62,7 @@ services:
 
   payment:
     build: ./payment
-    image: santhoshdevops/payment:v1
+    image: joindevops/payment:v1
     container_name: payment
     depends_on:
       - rabbitmq
@@ -70,7 +70,7 @@ services:
       - user
 
   frontend:
-    image: santhoshdevops/frontend:v1
+    image: joindevops/frontend:v1
     container_name: frontend
     ports:
       - 80:80
