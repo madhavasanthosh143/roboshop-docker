@@ -1,11 +1,15 @@
 services:
 
   mongodb:
+    build: ./mongodb  
     image: mongodb:v1
     container_name: mongodb
     volumes:
     - mongodb:/data/db
   catalogue:
+    build:
+      context: ./catalogue
+      dockerfile: Dockerfile
     image: catalouge:v1
     container_name: catalogue
     depends_on:
@@ -18,6 +22,7 @@ services:
       - redis:/data
 
   mysql:
+    build: ./mysql
     image: mysql:v1
     container_name: mysql
     volumes:
@@ -31,6 +36,7 @@ services:
       RABBITMQ_DEFAULT_PASS: roboshop123
 
   user:
+    build: ./user
     image: user:v1
     container_name: user
     depends_on:
@@ -38,6 +44,7 @@ services:
       - redis
 
   cart:
+    build: ./cart
     image: cart:v1
     container_name: cart
     depends_on:
@@ -45,6 +52,7 @@ services:
       - catalogue
 
   shipping:
+    build: ./shipping
     image: shipping:v1
     container_name: shipping
     depends_on:
@@ -52,6 +60,7 @@ services:
       - cart
 
   payment:
+    build: ./payment
     image: payment:v1
     container_name: payment
     depends_on:
