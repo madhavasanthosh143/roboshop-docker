@@ -26,11 +26,12 @@ services:
     image: mysql:v1
     container_name: mysql
     volumes:
-      -mysql:/var/lib/mysql
+      - mysql:/var/lib/mysql
   rabbitmq:
     image: rabbitmq:3
     container_name: rabbitmq
-    volumes:/var/lib/rabbitmq
+    volumes:
+      - rabbitmq:/var/lib/rabbitmq
     environment:
       RABBITMQ_DEFAULT_USER: roboshop
       RABBITMQ_DEFAULT_PASS: roboshop123
